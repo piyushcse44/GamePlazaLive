@@ -27,7 +27,7 @@ class GameList(models.Model):
     cons = models.ManyToManyField('Cons')
     device = models.CharField(max_length=10,choices=DevicesChoice)
     total_downloads = models.IntegerField( validators=[MaxValueValidator(10000000000000), MinValueValidator(0)],default=0)
-    Rating = models.DecimalField(
+    rating = models.DecimalField(
         max_digits=2,decimal_places=1, 
         default=0,validators=[MaxValueValidator(5.0), MinValueValidator(0.0)])
     created_at = models.DateTimeField(auto_now_add=True)

@@ -61,9 +61,10 @@
                 <img src='{% static  "assets/images/logo.png"  %}'' alt="" />
               </a>
               <!-- ***** Logo End ***** -->
+
               <!-- ***** Search Start***** -->
               <div class="search-input">
-                <form id="search" action="#">
+                <form id="search" action="{% url 'search' %}">
                   <input
                     type="text"
                     placeholder="Type Something"
@@ -75,6 +76,7 @@
                 </form>
               </div>
               <!-- ***** Search End ***** -->
+
               <!-- ***** Menu Start ***** -->
               <ul class="nav">
                 <li><a href="{% url 'homepage' %}" class="active">Home</a></li>
@@ -278,7 +280,7 @@
               <a
                 href="#"
                 target="_blank"
-                title="GameHubLive"
+                title="GamePlazaLive"
                 >Piyush kumar</a
               >
             </p>
