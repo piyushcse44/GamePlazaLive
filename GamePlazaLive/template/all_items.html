@@ -82,7 +82,6 @@
               <div class="heading-section">
                 <h4><em style="margin-right: 10px;">Search For</em> {{search_keyword}}</h4>
               </div>
-
               <div class="row">
                 {% include 'show_result.html' %}
               </div>
@@ -91,6 +90,8 @@
           </div>
         </div>
         <!-- ***** All Games End ***** -->
+
+        {% include 'pagination.html' %}
 
 
         {% endblock %}

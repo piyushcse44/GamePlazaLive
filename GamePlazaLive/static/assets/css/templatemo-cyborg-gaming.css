@@ -828,6 +828,9 @@ Most Popular Style
 
 .most-popular .item img {
   border-radius: 23px;
+  width: 234px;
+  object-fit: cover;
+  height: 234px;
 }
 
 .most-popular .item h4 {

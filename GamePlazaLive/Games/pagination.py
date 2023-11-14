@@ -1,27 +1,22 @@
 from .models import GameList
-from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-from .constants import get_name
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from .constants import count_item_in_each_page
 
 
-def paginate(request,queryset,result):
 
-    page =1
+def paginate(request, queryset):
 
-    p = Paginator(queryset,result)
+    page_number = request.GET.get('page', 1)
+
+    paginator = Paginator(queryset, count_item_in_each_page)
 
     try:
-        page = request.GET.get('page')
+        paginated_queryset = paginator.page(page_number)
     except PageNotAnInteger:
-        page =1
+        # If page is not an integer, deliver first page.
+        paginated_queryset = paginator.page(1)
     except EmptyPage:
-        page = p.num_pages
+        # If page is out of range (e.g., 9999), deliver last page.
+        paginated_queryset = paginator.page(paginator.num_pages)
 
-    queryset = p.page(page)   
-
-    return queryset 
-    
-
-
-
-
-
+    return paginated_queryset

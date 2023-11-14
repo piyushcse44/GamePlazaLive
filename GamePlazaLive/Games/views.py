@@ -38,7 +38,9 @@ def search(request):
         |                                   
         Q(company_name__icontains = search_keyword) 
      )
-    
+    # paginate to page number given by forntend and result are the count of item in one page
+    queryset = paginate(request,queryset)
+
     # compress downloads
     compress_download(queryset)
     

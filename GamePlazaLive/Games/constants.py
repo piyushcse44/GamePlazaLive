@@ -3,6 +3,9 @@ from decimal import Decimal, getcontext
 # set limit to digit on right of decimal
 getcontext().prec = 2
 
+# In pagination count of item in each is result
+count_item_in_each_page= 16
+
 
 # it is  device choice dropdown for all possible devices avaliable
 DevicesChoice =(
