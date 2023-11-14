@@ -1,15 +1,19 @@
 from django.shortcuts import render
 from .models import GameList
 from django.db.models import Q
-from .constants import compress_number
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from .constants import get_name,compress_download
+from .pagination import paginate
 # Create your views here.
-
-
 
 
 # this is a view or logic for Homepage of website
 def homepage(request):
-    return render(request,'home.html')
+    queryset = GameList.objects.all()[:8]
+  #compress download
+    compress_download(queryset)
+    data = {'results':queryset}
+    return render(request,'home.html',data)
 
 
 # this is a view or logic for browser of website
@@ -25,26 +29,26 @@ def streams(request):
 # this is a view or logic if someone search somehing from search bar
 def search(request):
 
-    search_keyword = ""
-    if request.GET.get("searchKeyword"):
-        search_keyword = request.GET.get("searchKeyword")
-
+    # retriev search keyword which is send from frontend
+    search_keyword =  get_name(request,'search_keyword')  
     
+    # search for games on the basic of their name or company name
     queryset = GameList.objects.filter(
-        Q(name__icontains = search_keyword)
-        |
-        Q(company_name__icontains = search_keyword)
+        Q(name__icontains = search_keyword)  
+        |                                   
+        Q(company_name__icontains = search_keyword) 
      )
-
-
+    
+    # compress downloads
+    compress_download(queryset)
+    
     data ={
         'search_keyword':search_keyword,
-        'results':queryset
+        'results':queryset,
     }
 
-    # compress downloads
-    for queryobj in data['results']:
-        queryobj.total_downloads = compress_number(queryobj.total_downloads)
+    
+    
     
    
 

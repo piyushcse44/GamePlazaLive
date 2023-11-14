@@ -1,0 +1,17 @@
+{% load static %}
+
+
+
+
+{% for result in results %}
+<div class="col-lg-3 col-sm-6">
+  <div class="item">
+    <img src=" {{result.feature_image.url}}" alt="" />    
+    <h4>{{result.name}}<br /><span>{{result.company_name}}</span></h4>
+    <ul>
+      <li><i class="fa fa-star"></i> {{result.rating}}</li>
+      <li><i class="fa fa-download"></i>{{result.total_downloads}}</li>
+    </ul>
+  </div>
+</div>
+{% endfor %}
